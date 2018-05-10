@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+
+	<script src="../js/jquery-slim.min.js"></script>
+	<script src="../js/jquery.timeago.js" type="text/javascript"></script>
+
+	<title><%= @title + ' | Tasks' %></title>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-inverse fixed-top">
+		<a class="navbar-brand d-none d-sm-block" href="/"><span class="icon icon-network"></span>Mis Tareas</a>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="/"><span class="icon icon-newspaper"></span>Inicio <span class="sr-only">(current)</span></a>
+			</li>      
+		</ul>
+		<button type="button" class="btn btn-light" data-toggle="modal" data-target="#newTask"><span class="icon icon-pencil"></span>Escribir</button>
+		<li class="dropdown">
+			<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left: 20px;" href="#" class="avatar" role="button" aria-haspopup="true" aria-expanded="false"> 
+				<img src="http://www.gravatar.com/avatar/319e0a50dedd8c8d0d6185f48950a9c6" class="rounded-circle">				
+			</a>
+			<span class="sr-only">Toggle Dropdown</span>
+			<ul style="margin-top: 11px;left: -86px;" class="dropdown-menu">
+				<li><a class="dropdown-item" href="#"><span class="sidebar-icon icon icon-user"></span>Perfil</a></li>
+				<li><a class="dropdown-item" href="/"><span class="sidebar-icon icon icon-newspaper"></span>Mis tareas</a></li>
+				<li><a class="dropdown-item" href="#"><span class="sidebar-icon icon icon-lifebuoy"></span>Ayuda y consejos</a></li>
+				<li role="separator" class="dropdown-divider"></li>
+				<li><a class="dropdown-item" href="#"><span class="sidebar-icon icon icon-logout"></span>Cerrar sesión</a></li>
+			</ul>						
+		</li>		
+		<li class="nav-item active">
+			<a id="menu-toggle" style="font-size: 24px;" class="nav-link" href="#menu-toggle"><span class="icon icon-bell"></span><span class="badge badge-pill badge-danger">5</span></a>
+		</li>	
+	</nav>
+	<!-- Sidebar -->
+	<div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav-r">
+                <li class="sidebar-brand"><a href="#"><strong>Notificaciones Recientes</strong></a></li>
+                <li><a href="#"><span class="sidebar-icon-r icon icon-cc-share"></span> Tienes tareas pendientes</a></li>
+                <li class="readed"><a href="#"><span class="sidebar-icon-r icon icon-bell"></span> Has creado 3 tareas nuevas</a></li>
+                <li><a href="#"><span class="sidebar-icon-r icon icon-qq"></span> Has completado la tarea #3232</a></li>
+                <li><a href="#"><span class="sidebar-icon-r icon icon-bell"></span> Has creado 1 tarea nueva</a></li>
+                <li><a href="#"><span class="sidebar-icon-r icon icon-qq"></span> Has completado la tarea #3274</a></li>                
+            </ul>
+        </div>
+    </div>
+        <!-- /#sidebar-wrapper -->
+	<div class="container-fluid">
+		<div class="row">
+			<nav class="col-md-3 d-none d-md-block sidebar">
+				<div class="sidebar-sticky">
+					<ul class="flex-column">
+						<div class="profile-gravatar">
+							<div><img alt="Dejosel" class="gravatar img-fluid" src="https://0.gravatar.com/avatar/319e0a50dedd8c8d0d6185f48950a9c6?s=400&amp;d=mm" width="150" height="150"></div><h2 class="user-display-name">Dejosel</h2><div class="user-info">@dejosel</div>
+						</div>
+						<div class="sidebar-signout">
+							<button type="button" class="btn btn-outline-info" title="Salir">Cerrar Sesión</button>
+						</div>						
+						<li class="sidebar-menu">				
+							<h2 class="sidebar-heading">Tareas</h2>
+							<ul class="sidebar-nav">
+								<a class="actived" href="/"><li class="nav-item"><span class="sidebar-icon icon icon-docs"></span> Todas mis Tareas</li></a>
+							</ul>
+						</li>
+						<li class="sidebar-menu">				
+							<h2 class="sidebar-heading">Perfil</h2>
+							<ul class="sidebar-nav">
+								<a href="#"><li class="nav-item"><span class="sidebar-icon icon icon-user"></span> Mi Perfil</li></a>
+								<a href="#"><li class="nav-item"><span class="sidebar-icon icon icon-cog"></span> Configurar Cuenta</li></a>
+								<a href="#"><li class="nav-item"><span class="sidebar-icon icon  icon-credit-card"></span> Gestionar Compras</li></a>
+								<a href="#"><li class="nav-item"><span class="sidebar-icon icon icon-lock"></span> Seguridad</li></a>
+								<a href="#"><li class="nav-item"><span class="sidebar-icon icon icon-bell"></span> Configurar Notificaciones</li></a>
+							</ul>
+						</li>
+						<li class="sidebar-menu">				
+							<h2 class="sidebar-heading">Especial</h2>
+							<ul class="sidebar-nav">
+								<a href="#"><li class="nav-item"><span class="sidebar-icon icon icon-github"></span> Obtener Aplicaciones</li></a>
+							</ul>
+						</li>		
+					</ul>	
+				</div>	
+			</nav>
+			<main class="col-md-9 ml-sm-auto col-lg-9 pt-3 px-4 sidebar-main">
+				<div id="main">
+					<%= yield %>
+				</div>
+			</main>
+		</div>
+	</div>
+	<!-- Start Modal -->
+	<div class="modal fade" id="newTask" tabindex="-1" role="dialog" aria-labelledby="tasks" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="tasks">NUEVA TAREA</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="/" method="post">
+						<div class="form-group">
+							<label for="message-text" class="col-form-label">Tarea:</label>
+							<textarea name="task" style="font-size: 15px;" class="form-control" id="message-text" placeholder="Escribe tu tarea aquí&hellip;"></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary"><span class="sidebar-icon icon icon-paper-plane"></span>Enviar Tarea</button>
+					</form>
+				</div>				
+			</div>
+		</div>
+	</div><!-- End Modal -->
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$(".sidebar-nav a").on("click", function(){
+				$(".sidebar-nav").find(".actived").removeClass("actived");
+				$(this).addClass("actived");
+			});
+		});
+		jQuery(document).ready(function() {
+			jQuery("abbr.timeago").timeago();
+		});
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		});
+		 $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+	</script>
+</body>
+</html>

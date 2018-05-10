@@ -1,0 +1,19 @@
+<% if !@task.empty? %>
+<div class="py-5">
+	<div class="alert alert-info" role="alert">
+		<h4 class="alert-heading">Estás seguro de eliminar está Tarea?:</h4>
+		<p class="py-3">"<%= @task["title"] %>"</p>
+		<form action="/<%= @task["id"] %>" method="post">
+			<input type="hidden" name="_method" value="delete">
+			<button type="submit" class="btn btn-danger">Sí, Borrarla!</button>
+			<div class="py-3">
+				<a href="/" type="button" class="btn btn-info">Cancelar</a>
+			</div>
+			<hr>
+			<p class="mb-0"><span class="sidebar-icon icon icon-alert"></span>Esta opción es irreversible!</p>
+		</form>
+	</div>
+</div>
+<% else %>
+<p>Task not found.</p>
+<% end %>

@@ -1,0 +1,39 @@
+<% if !@tasks.empty? %>
+<div class="row">
+	<% @tasks.each do |task| %>
+	<% t = Time.parse(task["created_at"]) %>
+	<% ta = Time.parse(task["updated_at"]) %>
+	<div class="col-sm-6 col-md-4">
+		<div class="card <%= task["id"] %> <%= task["done"] == true ? 'border-success':'border-info'%> mb-3">
+			<div class="card-header <%= task["id"] %> <%= task["done"] == true ? 'card-header-success':'card-header-primary'%>">
+				<%= task["done"] == true ? '<strong>Tarea Completada <span class="icon icon-check"></span></strong>':'Tarea No Completada <span class="icon icon-alert"></span>'%> <a id="<%= task["id"] %>" style="display:none" href="/<%= task["id"] %>/delete" class="badge badge-danger float-right">Borrar</a>
+			</div>
+			<div class="card-body <%= task["done"] == true ? 'text-success':'text-info'%>">
+				<h5 class="card-title">Mi tarea:</h5>
+				<p class="card-text font-italic"><span class="sidebar-icon icon icon-tag"></span>"<%= task["title"] %>"</p>
+				<p class="card-text py-3"><small class="text-muted"><strong>Creada:</strong> <abbr class="timeago" data-toggle="tooltip" data-placement="top" title="<%= t.getutc.iso8601 %>"><%= t.to_s %></abbr></small></p>
+				<p class="card-text py-3 <%= task["done"] == true ? '':'d-none'%>"><small class="text-muted"><strong>Actualizada:</strong> <abbr class="timeago" data-toggle="tooltip" data-placement="top" title="<%= ta.getutc.iso8601 %>"><%= ta.to_s %></abbr></small></p>
+				<div <%= task["done"] == true ? 'class="d-none"':''%>>
+					<a href="/<%= task["id"] %>/complete" class="btn btn btn-outline-primary">Completar</a>
+				</div>
+			</div>
+		</div>
+	</div> 
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$(".<%= task["id"] %>").hover(function() {
+				$("#<%= task["id"] %>").show();
+			}, function() {
+				$("#<%= task["id"] %>").hide();
+			});
+		});
+	</script>
+	<% end %> 
+</div>
+<% else %>
+<div class="align-middle py-5">
+	<div class="alert alert-info py-5" role="alert">
+		<p class="text-center"><span class="sidebar-icon icon icon-clipboard"></span>No hay Tareas para mostrar. Intenta creando una nueva Tarea desde el botón <strong>"Escribir"</strong> de la barra superior!</p>
+	</div>
+</div>
+<% end %>
